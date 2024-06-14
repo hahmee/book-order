@@ -35,7 +35,7 @@ const Cart = ()  => {
             <p className="cart-total">{currencyFormatter.format(cartTotal)}</p>
             <p className="modal-actions">
                 <Button textOnly onClick={hideCart}>
-                    Close
+                    닫기
                 </Button>
                 {items.length > 0 && (
                     <Button onClick={showCheckout}>Go to Checkout</Button>

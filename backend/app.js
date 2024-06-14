@@ -34,16 +34,16 @@ app.post('/orders', async (req, res) => {
     !orderData.customer.email.includes('@') ||
     orderData.customer.name === null ||
     orderData.customer.name.trim() === '' ||
-    orderData.customer.street === null ||
-    orderData.customer.street.trim() === '' ||
+    orderData.customer['phone-number'] === null ||
+    orderData.customer['phone-number'].trim() === '' ||
     orderData.customer['postal-code'] === null ||
     orderData.customer['postal-code'].trim() === '' ||
-    orderData.customer.city === null ||
-    orderData.customer.city.trim() === ''
+    orderData.customer.address === null ||
+    orderData.customer.address.trim() === ''
   ) {
     return res.status(400).json({
       message:
-        'Missing data: Email, name, street, postal code or city is missing.',
+        'Missing data: Email, name, phone number, postal code or adress is missing.',
     });
   }
 
