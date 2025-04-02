@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 
 import bodyParser from 'body-parser';
 import express from 'express';
+import axios from "axios";
 
 const app = express();
 
@@ -19,6 +20,41 @@ app.get('/books', async (req, res) => {
   const books = await fs.readFile('./data/available-books.json', 'utf8');
   res.json(JSON.parse(books));
 });
+//
+// app.get('/books', async (req, res) => {
+//   try {
+//     // 쿼리 파라미터 'q'를 통해 검색어를 전달할 수 있고, 기본값은 'fiction'입니다.
+//     const { q = 'history' } = req.query;
+//     const googleBooksUrl = 'https://www.googleapis.com/books/v1/volumes';
+//
+//     const response = await axios.get(googleBooksUrl, {
+//       params: {
+//         q,
+//         maxResults: 10,  // 필요에 따라 최대 결과 수 조정 가능
+//       }
+//     });
+//
+//     // Google Books API의 데이터를 원하는 형태로 가공
+//     const booksData = response.data.items.map(item => {
+//       const volumeInfo = item.volumeInfo || {};
+//       const saleInfo = item.saleInfo || {};
+//
+//       return {
+//         id: item.id,
+//         name: volumeInfo.title,
+//         price: saleInfo.listPrice ? saleInfo.listPrice.amount : '가격 정보 없음',
+//         description: volumeInfo.description || '설명 없음',
+//         image: volumeInfo.imageLinks ? volumeInfo.imageLinks.thumbnail : null
+//       };
+//     });
+//
+//     res.json(booksData);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send(error.message);
+//   }
+// });
+
 
 app.post('/orders', async (req, res) => {
   const orderData = req.body.order;

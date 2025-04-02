@@ -1,7 +1,7 @@
 import React from 'react';
 import Error from "./Error.jsx";
 import BookItem from "./BookItem.jsx";
-import useHttp from "./hooks/useHttp.js";
+import useHttp from "../hooks/useHttp.js";
 
 const requestConfig = {};
 

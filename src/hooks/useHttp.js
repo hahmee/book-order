@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 
 const sendHttpRequest = async (url, config) => {
 
@@ -21,18 +21,14 @@ const UseHttp = (url, config, initialData) => {
     const [data, setData] = useState(initialData);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false);
-    
-    const clearData = () => {
-        setData(initialData)
-    }
 
-    const sendRequest = useCallback(async(data) => {
+    const sendRequest = useCallback(async(data) => { //새 함수 객체가 계속 생성되지 않게 useCallback
         setIsLoading(true);
         try {
             const resData = await sendHttpRequest(url, { ...config, body: data });
             setData(resData);
         } catch (error) {
-            setError(error.message || 'Something went wrong!');
+            setError(error.message || '문제가 발생했습니다.');
         }
         setIsLoading(false);
     }, [url, config]);
@@ -44,7 +40,11 @@ const UseHttp = (url, config, initialData) => {
             sendRequest();
         }
 
-    }, [config, sendRequest]);
+    }, [config, sendRequest]); //외부에서 정의된 것들 의존성
+
+    const clearData = () => {
+        setData(initialData)
+    }
 
     return {
         data,

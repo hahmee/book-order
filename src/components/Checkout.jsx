@@ -5,7 +5,7 @@ import Button from "./UI/Button.jsx";
 import Input from "./UI/Input.jsx";
 import cartContext from "../store/CartContext.jsx";
 import {currencyFormatter} from "../util/formatting.js";
-import useHttp from "./hooks/useHttp.js";
+import useHttp from "../hooks/useHttp.js";
 import Error from "./Error.jsx";
 
 
