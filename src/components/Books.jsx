@@ -6,7 +6,7 @@ import useHttp from "../hooks/useHttp.js";
 const requestConfig = {};
 
 const Books = () =>{
-    const {data: loadedBooks,isLoading,error} = useHttp('http://localhost:3000/books', requestConfig, []);
+    const {data: loadedBooks, isLoading, error} = useHttp('http://localhost:3000/books', requestConfig, []);
 
     // const [loadData, setLoadData] = useState([]);
     // useEffect(() => {

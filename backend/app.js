@@ -23,62 +23,38 @@ app.use((req, res, next) => {
 // });
 //
 
-
 app.get('/books', async (req, res) => {
   try {
-    // // 쿼리 파라미터 'q'를 통해 검색어를 전달할 수 있고, 기본값은 'fiction'입니다.
-    // const { q = 'history' } = req.query;
-    // const googleBooksUrl = 'https://www.googleapis.com/books/v1/volumes';
-    //
-    // const response = await axios.get(googleBooksUrl, {
-    //   params: {
-    //     q,
-    //     maxResults: 10,  // 필요에 따라 최대 결과 수 조정 가능
-    //   }
-    // });
-    //
-    // // Google Books API의 데이터를 원하는 형태로 가공
-    // const booksData = response.data.items.map(item => {
-    //   const volumeInfo = item.volumeInfo || {};
-    //   const saleInfo = item.saleInfo || {};
-    //
-    //   return {
-    //     id: item.id,
-    //     name: volumeInfo.title,
-    //     price: saleInfo.listPrice ? saleInfo.listPrice.amount : '가격 정보 없음',
-    //     description: volumeInfo.description || '설명 없음',
-    //     image: volumeInfo.imageLinks ? volumeInfo.imageLinks.thumbnail : null
-    //   };
-    // });
-
-    // res.json(booksData);
-
     const response = await axios.get('https://dapi.kakao.com/v3/search/book', {
       params: {
-        query: '베스트셀러',
+        query: '인문',
         size: 10,
-        sort: 'accuracy'  // or 'latest'
+        sort: 'accuracy',
       },
       headers: {
         Authorization: `KakaoAK ${process.env.REST_API_KEY}`
       }
     });
 
-    return response.data.documents.map(book => ({
+    // ❗❗ 변경된 부분: return → res.json 으로 응답
+    const books = response.data.documents.map(book => ({
+      id: book.isbn,
       title: book.title,
       image: book.thumbnail,
       price: book.price,
+      authors: book.authors,
       sale_price: book.sale_price,
-      description: book.contents
+      description: book.contents,
+      publisher:book.publisher,
     }));
 
+    res.json(books);
 
   } catch (error) {
     console.error(error);
     res.status(500).send(error.message);
   }
 });
-
 
 app.post('/orders', async (req, res) => {
   const orderData = req.body.order;
