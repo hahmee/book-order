@@ -7,9 +7,19 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies / build outputs
 node_modules
 dist
 dist-ssr
+.next
+out
+.cache
+*.tsbuildinfo
+
+# Env & secrets
+.env
+.env.*
+!.env.example
 *.local
 
 # Editor directories and files
@@ -23,5 +33,21 @@ dist-ssr
 *.sln
 *.sw?
 
+# OS files
+Thumbs.db
+ehthumbs.db
+desktop.ini
 
-.env
+# Package managers
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Testing
+coverage
+.nyc_output
+jest-html-reporters-*
+
+# Archives
+*.tgz
+*.zip
