@@ -1,0 +1,3 @@
+- PR 전에 Issue를 먼저 작성해 주세요.
+- Conventional Commits 권장(`feat:`, `fix:`, `docs:`, `chore:` 등).
+- 작은 단위의 PR을 선호합니다.
